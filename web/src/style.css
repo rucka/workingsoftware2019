@@ -1,0 +1,125 @@
+.title {}
+
+.section {
+  padding: 0 3em;
+}
+
+.customer__title {
+  text-transform: uppercase;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.customer__panel {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.form {
+  border-left-width: 1px;
+  border-left-style: solid;
+}
+
+.form__row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}
+
+.form__row_content-start {
+  justify-content: flex-start;
+}
+
+.form__submit {
+  padding-top: 20px;
+}
+
+.customer__accept {
+  margin-right: 4px;
+}
+
+.form__row_content-end {
+  justify-content: flex-end;
+}
+
+.form__label {
+  padding-right: 3em;
+}
+
+.form__input {
+  min-width: 200px;
+  font-size: 1.2em;
+}
+
+.button {
+  background: #0066A2;
+  color: white;
+  border-style: outset;
+  border-color: #0066A2;
+  height: 25px;
+  width: 100px;
+  font: bold 15px arial, sans-serif;
+  text-shadow: none;
+  text-align: center;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.error {
+  margin-left: 4em;
+  padding-left: 1em;
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-color: red;
+  height: 100%;
+}
+
+.error__title {
+  margin: 0;
+  padding-left: 0;
+}
+
+.error__list {
+  color: red;
+}
+
+.error__item {}
+
+.message-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0px;
+  margin: 3em;
+}
+
+.message-panel__text {
+  margin: 10px;
+  padding: 0px;
+}
+
+.message-panel_success {
+  background-color: green;
+  color: white;
+}
+
+.message-panel_error {
+  background-color: red;
+  color: white;
+}
+
+.message-panel__close {
+  width: 1.7em;
+  background-color: gray;
+  margin: 10px;
+  margin-right: 1em;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.section_hidden,
+.error_hidden {
+  display: none;
+}

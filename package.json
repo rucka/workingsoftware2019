@@ -1,0 +1,46 @@
+{
+  "name": "workingsoftware2019",
+  "version": "0.0.0",
+  "description": "Working Software 2019 typescript in salsa funzionale",
+  "scripts": {
+    "yarn": "./yarn.sh ",
+    "start": "npm run start-api & npm run start-web",
+    "start-api": "nodemon --watch 'api/src/**/*.ts' --exec 'ts-node' api/src/index.ts",
+    "start-web": "webpack-dev-server --mode development --config web/webpack.config.ts"
+  },
+  "keywords": [
+    "typescript",
+    "fp-ts",
+    "workingsoftware",
+    "#WSC2019",
+    "agile",
+    "softwarecraftmanship",
+    "coding",
+    "functional programming"
+  ],
+  "author": "Gianluca Carucci <gianluca@carucci.org>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "fp-ts": "^1.17.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.16.1",
+    "@types/node": "^11.13.5",
+    "css-loader": "^2.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.6.0",
+    "nodemon": "^1.18.11",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.3",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
+  }
+}

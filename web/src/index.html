@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Working Software 2019 #3 - Typescript in salsa funzionale</title>
+  </head>
+  <body>
+    <h1 class="title"></h1>
+    <section class="section message-panel section_hidden">
+      <h1 class="message-panel__text"></h1>
+      <button class="button message-panel__close">X</button>
+    </section>
+    <section class="section customer">
+      <h2 class="customer__title">customer</h2>
+      <div class="customer__panel">
+        <form
+          class="form"
+          method="POST"
+          action="http://localhost:3333/customer"
+        >
+          <div class="form__row">
+            <label for="customer__name" class="form__label"
+              >customer name&nbsp;*</label
+            >
+            <input
+              type="text"
+              id="customer__name"
+              name="customer__name"
+              placeholder="Name"
+              class="form__input"
+              value="abc"
+            />
+          </div>
+          <div class="form__row">
+            <label for="customer__email" class="form__label"
+              >email address&nbsp;*</label
+            >
+            <input
+              type="text"
+              id="customer__email"
+              name="customer__email"
+              placeholder="Email"
+              class="form__input"
+              value="def"
+            />
+          </div>
+          <div class="form__row">
+            <label for="customer__vatcode" class="form__label"
+              >VAT code&nbsp;*</label
+            >
+            <input
+              type="text"
+              id="customer__vatcode"
+              name="customer__vatcode"
+              placeholder="VAT"
+              class="form__input"
+              value="ghi"
+            />
+          </div>
+          <div class="form__row">
+            <label for="customer__website" class="form__label">Website</label>
+            <input
+              type="text"
+              id="customer__website"
+              name="customer__website"
+              placeholder="Website"
+              class="form__input"
+              value="xxxx"
+            />
+          </div>
+          <div class="form__row form__row_content-end">
+            <input
+              type="checkbox"
+              name="customer__accept"
+              class="customer__accept"
+            /><span>*&nbsp;terms accepted</span>
+          </div>
+          <div class="form__row form__row_content-end form__submit">
+            <input
+              type="input"
+              class="button button__submit"
+              value="register!"
+            />
+          </div>
+        </form>
+        <div class="error error_hidden">
+          <h3 class="error__title">ERRORS:</h3>
+          <ul class="error__list">
+            <li class="error__item">error1...</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
