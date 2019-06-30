@@ -14,7 +14,7 @@
 
 ---
 
-##1 October 2012
+## October 01, 2012
 
 ![fit right](assets/introducing.png)
 ![left](assets/andershasaustinpowers.jpg)
@@ -420,8 +420,10 @@ var result = rows.SelectMany(r =>
 ![original](assets/questions.jpg)
 
 ---
-![](assets/thanks.jpg)
-
----
 
 ![fit](assets/followme.png)
+
+---
+![](assets/thanks.jpg)
+
+
