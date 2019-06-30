@@ -107,9 +107,9 @@ export const processCustomer = () => {
   Validation.foreach(text, t => alert(`I'm ${t}!`))
 
   if (isValid(validatedCustomer)) {
-    return saveCustomer(validatedCustomer)
+    return saveCustomer(validatedCustomer) //<--- here validatedCustomer is Valid<Customer>
   } else {
-    return showErrors(validatedCustomer)
+    return showErrors(validatedCustomer)   //<--- here validatedCustomer is Invalid<CustomerError>
   }
 }
 
