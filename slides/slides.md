@@ -406,6 +406,10 @@ var result = rows.SelectMany(r =>
 
 ---
 
+![fit](assets/fpts3.png)
+
+---
+
 ###the right tool 
 ###for 
 ###the right job
