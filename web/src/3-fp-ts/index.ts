@@ -1,44 +1,80 @@
 import { emailREx, urlREx, vatcodeREx } from '../_stuff/regex-collection'
 import { valOf, checkedOf } from '../_stuff/dom'
-import { NonEmptyArray, of, getSemigroup } from 'fp-ts/lib/NonEmptyArray'
+import { NonEmptyArray, getSemigroup } from 'fp-ts/lib/NonEmptyArray'
 import * as _ from 'fp-ts/lib/Either'
 import { sequenceT } from 'fp-ts/lib/Apply'
 import { pipe } from 'fp-ts/lib/pipeable'
 import { identity } from 'fp-ts/lib/function'
 
+const sequenceValidation = sequenceT(_.getValidation(getSemigroup<string>()))
+
 type Errors = NonEmptyArray<string>
 type Validation<A> = _.Either<Errors, A>
-const success = <A>(a: A) => _.right<Errors, A>(a)
-const failure = <A>(e: Errors) => _.left<Errors, A>(e)
+
+function lift<E, A>(
+  check: (a: A) => _.Either<E, A>
+): (a: A) => _.Either<NonEmptyArray<E>, A> {
+  return a =>
+    pipe(
+      check(a),
+      _.mapLeft(a => [a])
+    )
+}
+
+const notEmpty = (field: string) => (s: string): _.Either<string, string> =>
+  s && s.length > 0 ? _.right(s) : _.left(`${field} cannot be null`)
+
+const minLength = (field: string, chars: number) => (
+  s: string
+): _.Either<string, string> =>
+  s.length >= chars
+    ? _.right(s)
+    : _.left(
+        `${field} must be at least ${chars} chars long, actual is ${s.length}`
+      )
+
+const emailValid = (s: string): _.Either<string, string> =>
+  emailREx.test(s) ? _.right(s) : _.left(`url '${s}' is not valid`)
+
+const vatCodeValid = (s: string): _.Either<string, string> =>
+  vatcodeREx.test(s) ? _.right(s) : _.left(`VAT code '${s}' is not valid`)
+
+const urlValid = (s: string): _.Either<string, string> =>
+  urlREx.test(s) ? _.right(s) : _.left(`url '${s}' is not valid`)
+
+const termsIsValid = (b: boolean): _.Either<string, boolean> =>
+  b ? _.right(b) : _.left(`Terms must be accepted`)
 
 function validateName(name: string): Validation<string> {
-  if (name === '') return failure(of('Name cannot be empty'))
-  return name.length > 3
-    ? success(name)
-    : failure(
-        of(`Name must be at least 3 chars long, actual is ${name.length}`)
-      )
+  return pipe(
+    sequenceValidation(
+      lift(notEmpty('Name'))(name),
+      lift(minLength('Name', 3))(name)
+    ),
+    _.map(() => name)
+  )
 }
 function validateEmail(email: string): Validation<string> {
-  if (email === '') return failure(of('Email cannot be empty'))
-  return emailREx.test(email)
-    ? success(email)
-    : failure(of(`Email address '${email}' is not valid`))
+  return pipe(
+    sequenceValidation(lift(notEmpty('Email'))(email), lift(emailValid)(email)),
+    _.map(() => email)
+  )
 }
 function validateVatCode(vatcode: string): Validation<string> {
-  if (vatcode === '') return failure(of('VatCode cannot be empty'))
-  return vatcodeREx.test(vatcode)
-    ? success(vatcode)
-    : failure(of(`VAT code '${vatcode}' is not valid`))
+  return pipe(
+    sequenceValidation(
+      lift(notEmpty('Vatcode'))(vatcode),
+      lift(vatCodeValid)(vatcode)
+    ),
+    _.map(() => vatcode)
+  )
 }
 function validateUrl(url: string): Validation<string> {
-  console.log(url)
-  return url === null || url === '' || urlREx.test(url)
-    ? success(url)
-    : failure(of(`Url '${url}' is not valid`))
+  if (url === null || url === undefined || url === '') return _.right(url)
+  return lift(urlValid)(url)
 }
 function validateAccept(accept: boolean): Validation<boolean> {
-  return accept ? success(true) : failure(of(`Terms must be accepted`))
+  return lift(termsIsValid)(accept)
 }
 
 type Customer = {
@@ -57,7 +93,6 @@ const buildCustomer = ([name, email, vatcode, website, accept]: [
   boolean
 ]) => ({ name, email, vatcode, website, accept })
 
-const sequenceValidation = sequenceT(_.getValidation(getSemigroup<string>()))
 export const processCustomer = () => {
   //https://ema.codiceplastico.com/2018/08/02/fp-validation.html <- "Fp-ts validation spiegata bene"
   //https://dev.to/gcanti/getting-started-with-fp-ts-either-vs-validation-5eja <- Getting started with fp-ts: Either vs Validation
@@ -83,10 +118,7 @@ export const processCustomer = () => {
   pipe(
     customerValidated,
     _.map<Customer, string>(c => `${c.name}(${c.email})`),
-    _.fold(
-      () => console.error('opss... something goes wrong!'),
-      t => alert(`I'm ${t}!`)
-    )
+    _.fold(() => {}, t => alert(`I'm ${t}!`))
   )
 
   return _.fold<Errors, Customer, true | string[]>(identity, () => true)(
