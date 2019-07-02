@@ -426,4 +426,6 @@ var result = rows.SelectMany(r =>
 ---
 ![](assets/thanks.jpg)
 
+---
+![fit](assets/wsc-logo.png)
 
