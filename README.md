@@ -20,7 +20,7 @@ To run the demo and serve the html page (http://localhost:8080). please exec `np
 
 The slides are markdown rendered with Deckset app for OSX. If you need, you can give a try of the trial version available on Deckset website.
 
-The slides are also published on [slideshare](https://www.slideshare.net/rucka/typescript-come-forse-non-lo-hai-mai-visto).
+The slides are also published on [slideshare](https://www.slideshare.net/rucka/working-software-2019-typescript-come-forse-non-lo-hai-mai-visto).
 
 ## Questions?
 
